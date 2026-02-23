@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jugnu - Urdu Novel</title>
     <style>
-        :root { --main-color: #800000; --bg-color: #fff5f5; }
+        /* Blue Theme Update */
+        :root { --main-color: #0047AB; --bg-color: #f0f5ff; }
         
         /* Security: Disable Text Selection */
         body { 
@@ -21,10 +22,20 @@
         }
         
         .header { margin-bottom: 25px; padding: 15px; border-bottom: 2px solid var(--main-color); }
-        h2 { color: var(--main-color); margin-bottom: 5px; }
-        .writer { font-style: italic; color: #555; margin-bottom: 15px; }
         
-        /* White Box Update */
+        /* Stylish App Name Update */
+        .app-name { 
+            font-family: 'Georgia', serif;
+            font-size: 50px; 
+            font-weight: bold;
+            color: var(--main-color); 
+            margin-bottom: 0px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            letter-spacing: 2px;
+        }
+
+        .writer { font-style: italic; color: #555; margin-bottom: 15px; font-size: 18px; }
+        
         .description { 
             background: white; 
             padding: 15px; 
@@ -51,7 +62,7 @@
 <body oncontextmenu="return false">
 
     <div class="header">
-        <h2>Jugnu</h2>
+        <div class="app-name">Jugnu</div>
         <div class="writer">By Husny Kanwal</div>
     </div>
 
@@ -95,7 +106,6 @@
             const loader = document.getElementById('loader');
             wrapper.style.display = 'block'; 
             loader.style.display = 'block'; 
-            // Using /preview to embed Drive PDF correctly
             frame.src = `https://drive.google.com/file/d/${id}/preview`;
             wrapper.scrollIntoView({ behavior: 'smooth' });
         }
@@ -109,7 +119,6 @@
         }
 
         function rateApp() {
-            // Aap apni Jugnu app ka Play Store link yahan change kar sakti hain
             window.open('https://play.google.com/store/apps/details?id=com.jugnu.novel', '_blank');
         }
     </script>
