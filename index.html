@@ -5,118 +5,142 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jugnu - Urdu Novel</title>
     <style>
-        :root { --main-color: #0047AB; --bg-color: #f0f5ff; }
+        :root { --main: #0047AB; --bg: #f8faff; }
         
         body { 
-            -webkit-user-select: none; 
-            user-select: none; 
-            font-family: 'Segoe UI', Arial, sans-serif; 
-            text-align: center; 
-            background-color: var(--bg-color); 
-            padding: 0; 
-            margin: 0;
+            -webkit-user-select: none; user-select: none; 
+            font-family: 'Segoe UI', Roboto, sans-serif; 
+            text-align: center; background-color: var(--bg); 
+            margin: 0; padding: 0; overflow-x: hidden;
+        }
+
+        /* Header ki padding kam kar di taake top se space khatam ho */
+        .app-header {
+            background: white; padding: 10px 10px 5px 10px;
+            border-bottom: 3px solid var(--main);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .app-title { font-size: 30px; font-weight: 900; color: var(--main); margin: 0; }
+        .app-sub { font-size: 13px; color: #666; font-style: italic; margin-top: 0px; }
+
+        /* Ad box ka margin bilkul kam kar diya */
+        .ad-box { margin: 5px auto; min-height: 50px; width: 100%; max-width: 320px; }
+
+        /* Description card ka gap kam kiya */
+        .info-card { 
+            background: white; margin: 5px 15px; padding: 8px;
+            border-radius: 10px; font-size: 13px; line-height: 1.4;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05); border-left: 5px solid var(--main);
+        }
+
+        /* Buttons area ka gap fix kiya */
+        .mini-btns { display: flex; justify-content: center; gap: 8px; margin-bottom: 10px; }
+        .m-btn { 
+            background: white; color: var(--main); border: 1.5px solid var(--main);
+            padding: 5px 12px; border-radius: 20px; font-size: 11px; font-weight: bold;
+            cursor: pointer;
+        }
+
+        .grid-container { 
+            display: grid; grid-template-columns: 1fr 1fr; 
+            gap: 8px; padding: 0 15px; margin-bottom: 10px;
+        }
+        .p-btn { 
+            background: var(--main); color: white; border: none;
+            padding: 10px; border-radius: 6px; font-weight: bold;
+            font-size: 13px;
+        }
+
+        /* Novel area */
+        .novel-container { 
+            position: relative; width: 100%; height: 85vh; 
+            display: none; border-top: 2px solid var(--main);
+            background: #f0f0f0; margin-top: 5px;
         }
         
-        /* Header compact aur top par */
-        .header { padding: 10px 0 5px; border-bottom: 2px solid var(--main-color); margin-bottom: 5px; }
-        .app-name { font-family: 'Georgia', serif; font-size: 35px; font-weight: bold; color: var(--main-color); margin: 0; line-height: 1; }
-        .writer { font-style: italic; color: #555; font-size: 14px; margin-top: 2px; }
-
-        /* Ad slot ka space control kiya gaya hai */
-        .ad-slot { margin: 5px auto; width: 100%; min-height: 50px; overflow: hidden; }
-
-        .description { background: white; padding: 8px; border-radius: 8px; font-size: 13px; margin: 5px 15px 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); border: 1px solid #ddd; }
-
-        .action-bar { display: flex; justify-content: center; gap: 10px; margin-bottom: 10px; }
-        .action-btn { background: #fff; color: var(--main-color); border: 1.5px solid var(--main-color); padding: 5px 12px; border-radius: 20px; font-size: 11px; font-weight: bold; cursor: pointer; }
-
-        .btn-container { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; max-width: 380px; margin: 0 auto 10px; padding: 0 10px; }
-        .part-btn { background-color: var(--main-color); color: white; padding: 10px; border-radius: 6px; font-weight: bold; border: none; cursor: pointer; font-size: 13px; }
-
-        /* Novel section with protection layer */
-        .iframe-wrapper { position: relative; width: 100%; height: 80vh; display: none; margin-top: 5px; background: #000; }
-        
-        /* Ye layer Google Drive ke pop-out icon (arrow) ko block karegi */
-        .iframe-mask {
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 60px; /* Sirf icon wala area cover hoga */
-            height: 60px;
-            background: rgba(255, 255, 255, 0.01); 
-            z-index: 999;
+        .security-overlay {
+            position: absolute; top: 0; right: 0;
+            width: 70px; height: 60px;
+            background: transparent; z-index: 9999;
         }
 
         iframe { width: 100%; height: 100%; border: none; }
-        
-        .loader { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); border: 4px solid #f3f3f3; border-top: 4px solid var(--main-color); border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; }
+
+        .loader { 
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            border: 4px solid #ddd; border-top: 4px solid var(--main);
+            border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite;
+        }
         @keyframes spin { 0% { transform: translate(-50%, -50%) rotate(0deg); } 100% { transform: translate(-50%, -50%) rotate(360deg); } }
     </style>
 </head>
 
 <body oncontextmenu="return false">
 
-    <div class="header">
-        <div class="app-name">Jugnu</div>
-        <div class="writer">By Husny Kanwal</div>
+    <div class="app-header">
+        <h1 class="app-title">Jugnu</h1>
+        <div class="app-sub">By Husny Kanwal</div>
     </div>
 
-    <div class="ad-slot">
+    <div class="ad-box">
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-app-pub-8741169014792010" crossorigin="anonymous"></script>
         <ins class="adsbygoogle" style="display:block" data-ad-client="ca-app-pub-8741169014792010" data-ad-slot="6271639423" data-ad-format="auto" data-full-width-responsive="true"></ins>
-        <script> (adsbygoogle = window.adsbygoogle || []).push({}); </script>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
 
-    <div class="description">
-        Novel's by <b>Husny Kanwal</b>...<br>
-        Novels : jo dil m uter jayn❤️...
+    <div class="info-card">
+        Novel's by <b>Husny Kanwal</b><br>
+        Jo dil mein utar jayein ❤️
     </div>
 
-    <div class="action-bar">
-        <button class="action-btn" onclick="shareApp()">📤 Share App</button>
-        <button class="action-btn" onclick="rateApp()">⭐ Rate Us</button>
+    <div class="mini-btns">
+        <button class="m-btn" onclick="shareMe()">📤 Share</button>
+        <button class="m-btn" onclick="rateMe()">⭐ Rate Us</button>
     </div>
 
-    <div class="btn-container">
-        <button class="part-btn" onclick="loadNovel('1qLxxsgO12uBwvmBmFfqd55ANOA97xUez')">Jugnu Part 1</button>
-        <button class="part-btn" onclick="loadNovel('1cZZlxpb2j_uxBARr4AxAkm_GrL4vnAEL')">Jugnu Part 2</button>
-        <button class="part-btn" onclick="loadNovel('1HdaxbEm7vIJxSb_Q3d-xXU7o_8muFcTZ')">Jugnu Part 3</button>
-        <button class="part-btn" onclick="loadNovel('1F-tisC7NoO66M054uyXEnxBfSX8c1FNl')">Jugnu Part 4</button>
+    <div class="grid-container">
+        <button class="p-btn" onclick="openNovel('1qLxxsgO12uBwvmBmFfqd55ANOA97xUez')">Part 1</button>
+        <button class="p-btn" onclick="openNovel('1cZZlxpb2j_uxBARr4AxAkm_GrL4vnAEL')">Part 2</button>
+        <button class="p-btn" onclick="openNovel('1HdaxbEm7vIJxSb_Q3d-xXU7o_8muFcTZ')">Part 3</button>
+        <button class="p-btn" onclick="openNovel('1F-tisC7NoO66M054uyXEnxBfSX8c1FNl')">Part 4</button>
     </div>
 
-    <div class="iframe-wrapper" id="iframe-wrapper">
-        <div class="iframe-mask"></div> <div class="loader" id="loader"></div>
-        <iframe id="pdf_frame" onload="hideLoader()"></iframe>
+    <div class="novel-container" id="viewArea">
+        <div class="security-overlay"></div> <div class="loader" id="loadingIcon"></div>
+        <iframe id="novelFrame" onload="stopLoad()"></iframe>
     </div>
 
     <script>
-        function loadNovel(id) {
-            const wrapper = document.getElementById('iframe-wrapper');
-            const frame = document.getElementById('pdf_frame');
-            const loader = document.getElementById('loader');
-            wrapper.style.display = 'block'; 
-            loader.style.display = 'block'; 
+        function openNovel(id) {
+            const area = document.getElementById('viewArea');
+            const frame = document.getElementById('novelFrame');
+            const loader = document.getElementById('loadingIcon');
+            
+            area.style.display = 'block';
+            loader.style.display = 'block';
             frame.src = `https://drive.google.com/file/d/${id}/preview`;
-            wrapper.scrollIntoView({ behavior: 'smooth' });
+            
+            setTimeout(() => {
+                area.scrollIntoView({ behavior: 'smooth' });
+            }, 300);
         }
 
-        function hideLoader() { document.getElementById('loader').style.display = 'none'; }
+        function stopLoad() {
+            document.getElementById('loadingIcon').style.display = 'none';
+        }
 
-        function shareApp() {
+        function shareMe() {
             if (navigator.share) {
-                navigator.share({ title: 'Jugnu - Urdu Novel', text: 'Read amazing Urdu novels by Husny Kanwal!', url: window.location.href });
+                navigator.share({ title: 'Jugnu Novel', url: window.location.href });
             }
         }
 
-        function rateApp() {
+        function rateMe() {
             window.open('https://play.google.com/store/apps/details?id=com.jugnu.novel', '_blank');
         }
 
-        // Security: Copying Disabled
-        document.addEventListener('keydown', function(e) {
-            if (e.ctrlKey && (e.key === 'c' || e.key === 'u' || e.key === 's' || e.key === 'p')) {
-                e.preventDefault();
-            }
+        document.addEventListener('keydown', e => {
+            if (e.ctrlKey && ['c','u','s','p'].includes(e.key)) e.preventDefault();
         });
     </script>
 </body>
