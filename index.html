@@ -5,61 +5,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jugnu - Urdu Novel</title>
     <style>
-        /* Blue Theme Update */
         :root { --main-color: #0047AB; --bg-color: #f0f5ff; }
         
-        /* Security: Disable Text Selection */
         body { 
             -webkit-user-select: none; 
-            -ms-user-select: none; 
             user-select: none; 
             font-family: 'Segoe UI', Arial, sans-serif; 
             text-align: center; 
             background-color: var(--bg-color); 
-            padding: 20px; 
-            color: #333; 
-            margin-bottom: 20px; 
-        }
-        
-        .header { margin-bottom: 25px; padding: 15px; border-bottom: 2px solid var(--main-color); }
-        
-        /* Stylish App Name Update */
-        .app-name { 
-            font-family: 'Georgia', serif;
-            font-size: 50px; 
-            font-weight: bold;
-            color: var(--main-color); 
-            margin-bottom: 0px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-            letter-spacing: 2px;
-        }
-
-        .writer { font-style: italic; color: #555; margin-bottom: 15px; font-size: 18px; }
-        
-        .description { 
-            background: white; 
             padding: 15px; 
-            border-radius: 10px; 
-            font-size: 16px; 
-            line-height: 1.6; 
-            margin-bottom: 25px; 
-            text-align: center; 
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05); 
+            color: #333; 
         }
+        
+        .header { margin-bottom: 20px; padding: 10px; border-bottom: 2px solid var(--main-color); }
+        .app-name { font-family: 'Georgia', serif; font-size: 45px; font-weight: bold; color: var(--main-color); margin-bottom: 0px; }
+        .writer { font-style: italic; color: #555; margin-bottom: 10px; font-size: 18px; }
 
-        .btn-container { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; max-width: 400px; margin: 0 auto 25px; }
-        .part-btn { background-color: var(--main-color); color: white; padding: 12px; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 14px; cursor: pointer; border: none; }
+        /* Ad Style */
+        .ad-slot { margin: 10px auto; width: 100%; min-height: 50px; }
+
+        .description { background: white; padding: 15px; border-radius: 10px; font-size: 16px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+
+        /* Buttons Section */
         .action-bar { display: flex; justify-content: center; gap: 15px; margin-bottom: 20px; }
         .action-btn { background: #fff; color: var(--main-color); border: 2px solid var(--main-color); padding: 8px 15px; border-radius: 20px; font-size: 13px; font-weight: bold; cursor: pointer; }
-        .iframe-wrapper { position: relative; width: 100%; height: 85vh; margin-top: 15px; display: none; }
+
+        .btn-container { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; max-width: 400px; margin: 0 auto 20px; }
+        .part-btn { background-color: var(--main-color); color: white; padding: 12px; border-radius: 8px; font-weight: bold; border: none; cursor: pointer; }
+
+        .iframe-wrapper { position: relative; width: 100%; height: 80vh; margin-top: 15px; display: none; }
         iframe { width: 100%; height: 100%; border: 2px solid var(--main-color); border-radius: 10px; }
+        
         .loader { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); border: 5px solid #f3f3f3; border-top: 5px solid var(--main-color); border-radius: 50%; width: 50px; height: 50px; animation: spin 1s linear infinite; }
-        .footer-info { font-size: 12px; color: #777; margin-top: 20px; border-top: 1px solid #ddd; padding-top: 10px; }
         @keyframes spin { 0% { transform: translate(-50%, -50%) rotate(0deg); } 100% { transform: translate(-50%, -50%) rotate(360deg); } }
+        
+        .footer-info { font-size: 11px; color: #777; margin-top: 20px; padding-bottom: 20px; }
     </style>
 </head>
 
 <body oncontextmenu="return false">
+
+    <div class="ad-slot">
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-app-pub-8741169014792010" crossorigin="anonymous"></script>
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-app-pub-8741169014792010" data-ad-slot="6271639423" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script> (adsbygoogle = window.adsbygoogle || []).push({}); </script>
+    </div>
 
     <div class="header">
         <div class="app-name">Jugnu</div>
@@ -88,18 +78,17 @@
         <iframe id="pdf_frame" onload="hideLoader()"></iframe>
     </div>
 
+    <div class="ad-slot">
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-app-pub-8741169014792010" crossorigin="anonymous"></script>
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-app-pub-8741169014792010" data-ad-slot="6271639423" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script> (adsbygoogle = window.adsbygoogle || []).push({}); </script>
+    </div>
+
     <div class="footer-info">
-        Features: Zoom In/Out • Night Mode • Easy Navigation • Search • Offline Access
+        Features: Zoom In/Out • Night Mode • Easy Navigation • Search
     </div>
 
     <script>
-        document.addEventListener('keydown', function(e) {
-            if (e.ctrlKey && (e.key === 'c' || e.key === 's' || e.key === 'u' || e.key === 'p')) {
-                e.preventDefault();
-                alert("Security Protected: Copying is disabled.");
-            }
-        });
-
         function loadNovel(id) {
             const wrapper = document.getElementById('iframe-wrapper');
             const frame = document.getElementById('pdf_frame');
@@ -115,12 +104,21 @@
         function shareApp() {
             if (navigator.share) {
                 navigator.share({ title: 'Jugnu - Urdu Novel', text: 'Read amazing Urdu novels by Husny Kanwal!', url: window.location.href });
+            } else {
+                alert("Share link: " + window.location.href);
             }
         }
 
         function rateApp() {
             window.open('https://play.google.com/store/apps/details?id=com.jugnu.novel', '_blank');
         }
+
+        // Security: Disable certain keys
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && (e.key === 'c' || e.key === 'u' || e.key === 's')) {
+                e.preventDefault();
+            }
+        });
     </script>
 </body>
 </html>
