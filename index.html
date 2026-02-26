@@ -13,47 +13,48 @@
             font-family: 'Segoe UI', Arial, sans-serif; 
             text-align: center; 
             background-color: var(--bg-color); 
-            padding: 15px; 
+            padding: 5px; /* Padding kam kar di gayi hai */
             color: #333; 
+            margin: 0;
         }
         
-        .header { margin-bottom: 20px; padding: 10px; border-bottom: 2px solid var(--main-color); }
-        .app-name { font-family: 'Georgia', serif; font-size: 45px; font-weight: bold; color: var(--main-color); margin-bottom: 0px; }
-        .writer { font-style: italic; color: #555; margin-bottom: 10px; font-size: 18px; }
+        /* Header ko thora compact kiya gaya hai */
+        .header { margin-top: 10px; margin-bottom: 15px; padding: 5px; border-bottom: 2px solid var(--main-color); }
+        .app-name { font-family: 'Georgia', serif; font-size: 38px; font-weight: bold; color: var(--main-color); margin: 0; }
+        .writer { font-style: italic; color: #555; margin-bottom: 5px; font-size: 16px; }
 
-        /* Ad Style */
-        .ad-slot { margin: 10px auto; width: 100%; min-height: 50px; }
+        /* Ad slot ko fix kiya gaya hai taake shuru mein space na ghere */
+        .ad-slot { margin: 5px auto; width: 100%; min-height: 50px; display: block; overflow: hidden; }
 
-        .description { background: white; padding: 15px; border-radius: 10px; font-size: 16px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .description { background: white; padding: 10px; border-radius: 8px; font-size: 14px; margin: 0 10px 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); border: 1px solid #ddd; }
 
-        /* Buttons Section */
-        .action-bar { display: flex; justify-content: center; gap: 15px; margin-bottom: 20px; }
-        .action-btn { background: #fff; color: var(--main-color); border: 2px solid var(--main-color); padding: 8px 15px; border-radius: 20px; font-size: 13px; font-weight: bold; cursor: pointer; }
+        .action-bar { display: flex; justify-content: center; gap: 10px; margin-bottom: 15px; }
+        .action-btn { background: #fff; color: var(--main-color); border: 1.5px solid var(--main-color); padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: bold; cursor: pointer; }
 
-        .btn-container { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; max-width: 400px; margin: 0 auto 20px; }
-        .part-btn { background-color: var(--main-color); color: white; padding: 12px; border-radius: 8px; font-weight: bold; border: none; cursor: pointer; }
+        .btn-container { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; max-width: 380px; margin: 0 auto 15px; padding: 0 10px; }
+        .part-btn { background-color: var(--main-color); color: white; padding: 10px; border-radius: 6px; font-weight: bold; border: none; cursor: pointer; font-size: 13px; }
 
-        .iframe-wrapper { position: relative; width: 100%; height: 80vh; margin-top: 15px; display: none; }
-        iframe { width: 100%; height: 100%; border: 2px solid var(--main-color); border-radius: 10px; }
+        .iframe-wrapper { position: relative; width: 100%; height: 80vh; margin-top: 10px; display: none; }
+        iframe { width: 100%; height: 100%; border: 2px solid var(--main-color); border-radius: 8px; }
         
-        .loader { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); border: 5px solid #f3f3f3; border-top: 5px solid var(--main-color); border-radius: 50%; width: 50px; height: 50px; animation: spin 1s linear infinite; }
+        .loader { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); border: 4px solid #f3f3f3; border-top: 4px solid var(--main-color); border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; }
         @keyframes spin { 0% { transform: translate(-50%, -50%) rotate(0deg); } 100% { transform: translate(-50%, -50%) rotate(360deg); } }
         
-        .footer-info { font-size: 11px; color: #777; margin-top: 20px; padding-bottom: 20px; }
+        .footer-info { font-size: 10px; color: #777; margin-top: 15px; padding-bottom: 10px; }
     </style>
 </head>
 
 <body oncontextmenu="return false">
 
+    <div class="header">
+        <div class="app-name">Jugnu</div>
+        <div class="writer">By Husny Kanwal</div>
+    </div>
+
     <div class="ad-slot">
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-app-pub-8741169014792010" crossorigin="anonymous"></script>
         <ins class="adsbygoogle" style="display:block" data-ad-client="ca-app-pub-8741169014792010" data-ad-slot="6271639423" data-ad-format="auto" data-full-width-responsive="true"></ins>
         <script> (adsbygoogle = window.adsbygoogle || []).push({}); </script>
-    </div>
-
-    <div class="header">
-        <div class="app-name">Jugnu</div>
-        <div class="writer">By Husny Kanwal</div>
     </div>
 
     <div class="description">
@@ -78,12 +79,6 @@
         <iframe id="pdf_frame" onload="hideLoader()"></iframe>
     </div>
 
-    <div class="ad-slot">
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-app-pub-8741169014792010" crossorigin="anonymous"></script>
-        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-app-pub-8741169014792010" data-ad-slot="6271639423" data-ad-format="auto" data-full-width-responsive="true"></ins>
-        <script> (adsbygoogle = window.adsbygoogle || []).push({}); </script>
-    </div>
-
     <div class="footer-info">
         Features: Zoom In/Out • Night Mode • Easy Navigation • Search
     </div>
@@ -104,8 +99,6 @@
         function shareApp() {
             if (navigator.share) {
                 navigator.share({ title: 'Jugnu - Urdu Novel', text: 'Read amazing Urdu novels by Husny Kanwal!', url: window.location.href });
-            } else {
-                alert("Share link: " + window.location.href);
             }
         }
 
@@ -113,9 +106,9 @@
             window.open('https://play.google.com/store/apps/details?id=com.jugnu.novel', '_blank');
         }
 
-        // Security: Disable certain keys
+        // Security: Copying Disabled
         document.addEventListener('keydown', function(e) {
-            if (e.ctrlKey && (e.key === 'c' || e.key === 'u' || e.key === 's')) {
+            if (e.ctrlKey && (e.key === 'c' || e.key === 'u' || e.key === 's' || e.key === 'p')) {
                 e.preventDefault();
             }
         });
