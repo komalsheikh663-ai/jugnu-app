@@ -1,6 +1,4 @@
-
-</body>
-</html><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ur">
 <head>
     <meta charset="UTF-8">
@@ -15,46 +13,41 @@
             font-family: 'Segoe UI', Arial, sans-serif; 
             text-align: center; 
             background-color: var(--bg-color); 
-            padding: 5px; 
+            padding: 0; 
             margin: 0;
         }
         
-        .header { margin-top: 10px; margin-bottom: 15px; padding: 5px; border-bottom: 2px solid var(--main-color); }
-        .app-name { font-family: 'Georgia', serif; font-size: 38px; font-weight: bold; color: var(--main-color); margin: 0; }
-        .writer { font-style: italic; color: #555; margin-bottom: 5px; font-size: 16px; }
+        /* Header compact aur top par */
+        .header { padding: 10px 0 5px; border-bottom: 2px solid var(--main-color); margin-bottom: 5px; }
+        .app-name { font-family: 'Georgia', serif; font-size: 35px; font-weight: bold; color: var(--main-color); margin: 0; line-height: 1; }
+        .writer { font-style: italic; color: #555; font-size: 14px; margin-top: 2px; }
 
-        .ad-slot { margin: 5px auto; width: 100%; min-height: 50px; }
+        /* Ad slot ka space control kiya gaya hai */
+        .ad-slot { margin: 5px auto; width: 100%; min-height: 50px; overflow: hidden; }
 
-        .description { background: white; padding: 10px; border-radius: 8px; font-size: 14px; margin: 0 10px 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); border: 1px solid #ddd; }
+        .description { background: white; padding: 8px; border-radius: 8px; font-size: 13px; margin: 5px 15px 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); border: 1px solid #ddd; }
 
-        .action-bar { display: flex; justify-content: center; gap: 10px; margin-bottom: 15px; }
-        .action-btn { background: #fff; color: var(--main-color); border: 1.5px solid var(--main-color); padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: bold; cursor: pointer; }
+        .action-bar { display: flex; justify-content: center; gap: 10px; margin-bottom: 10px; }
+        .action-btn { background: #fff; color: var(--main-color); border: 1.5px solid var(--main-color); padding: 5px 12px; border-radius: 20px; font-size: 11px; font-weight: bold; cursor: pointer; }
 
-        .btn-container { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; max-width: 380px; margin: 0 auto 15px; padding: 0 10px; }
+        .btn-container { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; max-width: 380px; margin: 0 auto 10px; padding: 0 10px; }
         .part-btn { background-color: var(--main-color); color: white; padding: 10px; border-radius: 6px; font-weight: bold; border: none; cursor: pointer; font-size: 13px; }
 
-        /* Iframe Wrapper with Protection */
-        .iframe-wrapper { 
-            position: relative; 
-            width: 100%; 
-            height: 80vh; 
-            margin-top: 10px; 
-            display: none; 
-            overflow: hidden;
-        }
-
-        /* Ye layer Google Drive ke top buttons ko block karegi */
+        /* Novel section with protection layer */
+        .iframe-wrapper { position: relative; width: 100%; height: 80vh; display: none; margin-top: 5px; background: #000; }
+        
+        /* Ye layer Google Drive ke pop-out icon (arrow) ko block karegi */
         .iframe-mask {
             position: absolute;
             top: 0;
             right: 0;
-            width: 100%;
-            height: 55px; /* Icon area cover karne ke liye */
+            width: 60px; /* Sirf icon wala area cover hoga */
+            height: 60px;
             background: rgba(255, 255, 255, 0.01); 
-            z-index: 10;
+            z-index: 999;
         }
 
-        iframe { width: 100%; height: 100%; border: 2px solid var(--main-color); border-radius: 8px; }
+        iframe { width: 100%; height: 100%; border: none; }
         
         .loader { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); border: 4px solid #f3f3f3; border-top: 4px solid var(--main-color); border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; }
         @keyframes spin { 0% { transform: translate(-50%, -50%) rotate(0deg); } 100% { transform: translate(-50%, -50%) rotate(360deg); } }
@@ -119,6 +112,7 @@
             window.open('https://play.google.com/store/apps/details?id=com.jugnu.novel', '_blank');
         }
 
+        // Security: Copying Disabled
         document.addEventListener('keydown', function(e) {
             if (e.ctrlKey && (e.key === 'c' || e.key === 'u' || e.key === 's' || e.key === 'p')) {
                 e.preventDefault();
@@ -127,4 +121,3 @@
     </script>
 </body>
 </html>
-
