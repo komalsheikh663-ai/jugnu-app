@@ -14,44 +14,55 @@
             margin: 0; padding: 0; overflow-x: hidden;
         }
 
-        /* Header ki padding kam kar di taake top se space khatam ho */
         .app-header {
-            background: white; padding: 10px 10px 5px 10px;
+            background: white; padding: 15px 10px;
             border-bottom: 3px solid var(--main);
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
-        .app-title { font-size: 30px; font-weight: 900; color: var(--main); margin: 0; }
-        .app-sub { font-size: 13px; color: #666; font-style: italic; margin-top: 0px; }
+        
+        /* UPDATED: Jugnu title now uses a more beautiful serif font with larger size */
+        .app-title { 
+            font-size: 34px; font-weight: 900; 
+            color: var(--main); margin: 0; 
+            font-family: 'Georgia', serif;
+        }
+        
+        /* UPDATED: Increased top margin to move 'Husny Kanwal' slightly down */
+        .app-sub { font-size: 13px; color: #666; font-style: italic; margin-top: 5px; }
 
-        /* Ad box ka margin bilkul kam kar diya */
-        .ad-box { margin: 5px auto; min-height: 50px; width: 100%; max-width: 320px; }
+        /* Banner Ad Area - Start mein hidden rahega */
+        .ad-box { 
+            display: none; 
+            margin: 10px auto; 
+            min-height: 50px; 
+            width: 100%; 
+            max-width: 320px; 
+        }
 
-        /* Description card ka gap kam kiya */
         .info-card { 
-            background: white; margin: 5px 15px; padding: 8px;
-            border-radius: 10px; font-size: 13px; line-height: 1.4;
+            background: white; margin: 20px 15px 10px 15px; padding: 12px;
+            border-radius: 10px; font-size: 14px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.05); border-left: 5px solid var(--main);
         }
 
-        /* Buttons area ka gap fix kiya */
-        .mini-btns { display: flex; justify-content: center; gap: 8px; margin-bottom: 10px; }
+        .mini-btns { display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; }
         .m-btn { 
             background: white; color: var(--main); border: 1.5px solid var(--main);
-            padding: 5px 12px; border-radius: 20px; font-size: 11px; font-weight: bold;
+            padding: 6px 16px; border-radius: 20px; font-size: 12px; font-weight: bold;
             cursor: pointer;
         }
 
         .grid-container { 
             display: grid; grid-template-columns: 1fr 1fr; 
-            gap: 8px; padding: 0 15px; margin-bottom: 10px;
+            gap: 12px; padding: 0 15px; margin-bottom: 20px;
         }
         .p-btn { 
             background: var(--main); color: white; border: none;
-            padding: 10px; border-radius: 6px; font-weight: bold;
-            font-size: 13px;
+            padding: 14px; border-radius: 8px; font-weight: bold;
+            font-size: 14px; cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
 
-        /* Novel area */
         .novel-container { 
             position: relative; width: 100%; height: 85vh; 
             display: none; border-top: 2px solid var(--main);
@@ -82,19 +93,13 @@
         <div class="app-sub">By Husny Kanwal</div>
     </div>
 
-    <div class="ad-box">
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-app-pub-8741169014792010" crossorigin="anonymous"></script>
-        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-app-pub-8741169014792010" data-ad-slot="6271639423" data-ad-format="auto" data-full-width-responsive="true"></ins>
-        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-    </div>
-
     <div class="info-card">
         Novel's by <b>Husny Kanwal</b><br>
         Jo dil mein utar jayein ❤️
     </div>
 
     <div class="mini-btns">
-        <button class="m-btn" onclick="shareMe()">📤 Share</button>
+        <button class="m-btn" onclick="shareMe()">📤 Share App</button>
         <button class="m-btn" onclick="rateMe()">⭐ Rate Us</button>
     </div>
 
@@ -105,8 +110,15 @@
         <button class="p-btn" onclick="openNovel('1F-tisC7NoO66M054uyXEnxBfSX8c1FNl')">Part 4</button>
     </div>
 
+    <div class="ad-box" id="bannerAd">
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-app-pub-8741169014792010" crossorigin="anonymous"></script>
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-app-pub-8741169014792010" data-ad-slot="6271639423" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
     <div class="novel-container" id="viewArea">
-        <div class="security-overlay"></div> <div class="loader" id="loadingIcon"></div>
+        <div class="security-overlay"></div> 
+        <div class="loader" id="loadingIcon"></div>
         <iframe id="novelFrame" onload="stopLoad()"></iframe>
     </div>
 
@@ -115,13 +127,18 @@
             const area = document.getElementById('viewArea');
             const frame = document.getElementById('novelFrame');
             const loader = document.getElementById('loadingIcon');
+            const ad = document.getElementById('bannerAd');
             
+            // Show Ad and Novel View
+            ad.style.display = 'block';
             area.style.display = 'block';
             loader.style.display = 'block';
+            
             frame.src = `https://drive.google.com/file/d/${id}/preview`;
             
+            // Smooth scroll to content
             setTimeout(() => {
-                area.scrollIntoView({ behavior: 'smooth' });
+                ad.scrollIntoView({ behavior: 'smooth' });
             }, 300);
         }
 
@@ -130,8 +147,23 @@
         }
 
         function shareMe() {
+            const shareData = {
+                title: 'Jugnu Novel',
+                text: 'Jugnu Urdu Novel by Husny Kanwal parhein!',
+                url: window.location.href
+            };
+
             if (navigator.share) {
-                navigator.share({ title: 'Jugnu Novel', url: window.location.href });
+                navigator.share(shareData).catch(err => console.log('Error sharing', err));
+            } else {
+                // Fallback: Copy link
+                const dummy = document.createElement('input');
+                document.body.appendChild(dummy);
+                dummy.value = shareData.url;
+                dummy.select();
+                document.execCommand('copy');
+                document.body.removeChild(dummy);
+                alert('App link copied to clipboard!');
             }
         }
 
@@ -139,6 +171,7 @@
             window.open('https://play.google.com/store/apps/details?id=com.jugnu.novel', '_blank');
         }
 
+        // Basic Security
         document.addEventListener('keydown', e => {
             if (e.ctrlKey && ['c','u','s','p'].includes(e.key)) e.preventDefault();
         });
